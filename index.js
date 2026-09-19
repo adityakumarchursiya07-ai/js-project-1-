@@ -4,24 +4,8 @@ const todoList = document.querySelector("#todo-list")
 const formBtn = document.querySelector("#form-btn")
 const taskCount = document.querySelector("#task-count")
 const completeCount= document.querySelector("#tsak-copmleted")
-let todos = [{
-   id: Date.now() + 1,
-   text: "Goto gym ",
-   iscompleted: false
-},
 
-{
-   id: Date.now() + 2,
-   text: "revise weeb dev ",
-   iscompleted: true
-},
-
-{
-   id: Date.now() + 3,
-   text: "do hardwork ",
-   iscompleted: false
-}
-];
+let todos =JSON.parse(localStorage.getItem("todos")) || [ ];
 
 
 let editTodoId = null;//flag
@@ -49,6 +33,8 @@ todoform.addEventListener('submit', (e) => {
          }
          return todo
       })
+       localStorage.setItem("todos",JSON.stringify(todos));
+
        editTodoId= null;
    formBtn.textContent= "Add";
    formBtn.classList.remove("startEdit");
@@ -75,6 +61,8 @@ todoform.addEventListener('submit', (e) => {
    todoInput.value = ""
    renderTodo()
 })
+       localStorage.setItem("todos",JSON.stringify(todos));
+
 
 
 function renderTodo() {
@@ -83,6 +71,8 @@ function renderTodo() {
    todos.forEach(function (todo) {
       addTodo(todo);
    })
+    localStorage.setItem("todos",JSON.stringify(todos));
+
 }
 
 
@@ -145,6 +135,8 @@ todoList.addEventListener(`click`, (e) => {
          }
          return todo
       })
+       localStorage.setItem("todos",JSON.stringify(todos));
+
       renderTodo();
    }
 })
@@ -171,6 +163,8 @@ function startEdit(id) {
       }
       
    })
+    localStorage.setItem("todos",JSON.stringify(todos));
+
 
 
    
